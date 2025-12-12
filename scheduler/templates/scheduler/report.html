@@ -1,0 +1,64 @@
+<!-- scheduler/templates/scheduler/report.html -->
+{% extends 'scheduler/base.html' %}
+
+{% block content %}
+<h2>Workout Report</h2>
+
+<form method="get">
+    <fieldset>
+        <legend>Filters</legend>
+
+        <label for="{{ form.start_date.id_for_label }}">Start date:</label>
+        {{ form.start_date }}
+
+        <label for="{{ form.end_date.id_for_label }}">End date:</label>
+        {{ form.end_date }}
+
+        <label for="{{ form.workout_type.id_for_label }}">Workout type:</label>
+        {{ form.workout_type }}
+
+        <br><br>
+        <button class="button" type="submit">Run report</button>
+    </fieldset>
+</form>
+
+{% if sessions is not None %}
+    <h3>Results</h3>
+    {% if sessions %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Duration (min)</th>
+                    <th>Intensity</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for s in sessions %}
+                <tr>
+                    <td>{{ s.date }}</td>
+                    <td>{{ s.start_time }}</td>
+                    <td>{{ s.title }}</td>
+                    <td>{{ s.workout_type.name }}</td>
+                    <td>{{ s.duration_minutes }}</td>
+                    <td>{{ s.intensity }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Summary statistics</h3>
+        <ul>
+            <li>Total sessions: {{ stats.total_sessions }}</li>
+            <li>Average duration: {{ stats.avg_duration|default:"0"|floatformat:1 }} minutes</li>
+            <li>Average intensity: {{ stats.avg_intensity|default:"0"|floatformat:1 }} (1-5)</li>
+        </ul>
+    {% else %}
+        <p>No sessions match these filters.</p>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

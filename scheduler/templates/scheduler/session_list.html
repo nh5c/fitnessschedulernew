@@ -1,0 +1,41 @@
+<!-- scheduler/templates/scheduler/session_list.html -->
+{% extends 'scheduler/base.html' %}
+
+{% block content %}
+<h2>Workout Sessions</h2>
+
+{% if sessions %}
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Duration (min)</th>
+            <th>Intensity (1-5)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for s in sessions %}
+        <tr>
+            <td>{{ s.date }}</td>
+            <td>{{ s.start_time }}</td>
+            <td>{{ s.title }}</td>
+            <td>{{ s.workout_type.name }}</td>
+            <td>{{ s.duration_minutes }}</td>
+            <td>{{ s.intensity }}</td>
+            <td>
+                <a class="button" href="{% url 'session_update' s.pk %}">Edit</a>
+                <a class="button danger" href="{% url 'session_delete' s.pk %}">Delete</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No sessions yet. <a href="{% url 'session_create' %}">Create your first workout</a>.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,186 @@
+<!-- scheduler/templates/scheduler/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Fitness Scheduler</title>
+    <style>
+    :root {
+        --bg: #f4f6fb;
+        --card-bg: #ffffff;
+        --accent: #2d7ff9;
+        --accent-soft: #e0ecff;
+        --danger: #e74c3c;
+        --text-main: #1f2933;
+        --text-muted: #6b7280;
+        --border: #e5e7eb;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+    }
+
+    .page-shell {
+        min-height: 100vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 40px 16px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 960px;
+        background-color: var(--card-bg);
+        border-radius: 18px;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        padding: 24px 28px 28px;
+        box-sizing: border-box;
+    }
+
+    header {
+        margin-bottom: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+        margin: 0;
+    }
+
+    header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        color: var(--text-main);
+        background-color: var(--accent-soft);
+        border: 1px solid transparent;
+    }
+
+    nav a:hover {
+        border-color: var(--accent);
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 1.2rem;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: #fff;
+    }
+
+    th, td {
+        padding: 9px 10px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.9rem;
+    }
+
+    th {
+        background-color: #f9fafb;
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    tr:nth-child(even) td {
+        background-color: #fbfcff;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 6px 11px;
+        border-radius: 999px;
+        background-color: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-size: 0.8rem;
+        border: none;
+    }
+
+    .button:hover {
+        filter: brightness(0.95);
+    }
+
+    .button.danger {
+        background-color: var(--danger);
+    }
+
+    form {
+        margin-top: 8px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 4px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 7px 9px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        box-sizing: border-box;
+        font-size: 0.9rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    .errorlist {
+        color: var(--danger);
+        list-style: none;
+        padding-left: 0;
+        margin: 3px 0 0;
+        font-size: 0.8rem;
+    }
+</style>
+</head>
+<body>
+<div class="page-shell">
+  <div class="container">
+      <header>
+          <h1>Fitness Scheduler</h1>
+          <p>Plan your workouts and track your weekly training.</p>
+          <nav>
+              <a href="{% url 'session_list' %}">All Sessions</a>
+              <a href="{% url 'session_create' %}">Add Session</a>
+              <a href="{% url 'session_report' %}">Reports</a>
+          </nav>
+      </header>
+
+      {% block content %}{% endblock %}
+  </div>
+</div>
+</body>
+</html>

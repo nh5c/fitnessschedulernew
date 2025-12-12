@@ -1,0 +1,14 @@
+<!-- scheduler/templates/scheduler/session_confirm_delete.html -->
+{% extends 'scheduler/base.html' %}
+
+{% block content %}
+<h2>Delete Workout Session</h2>
+
+<p>Are you sure you want to delete "{{ session.title }}" on {{ session.date }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button class="button danger" type="submit">Yes, delete</button>
+    <a class="button" href="{% url 'session_list' %}">Cancel</a>
+</form>
+{% endblock %}
